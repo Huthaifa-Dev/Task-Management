@@ -1,0 +1,66 @@
+li {
+  margin: 10px 0;
+}
+li .task-item {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1em 1em;
+  border-radius: 5px;
+  color: white;
+  align-items: center;
+}
+li .task-item.deleted .task-item__actions button {
+  pointer-events: none;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+li .task-item.checked .task-item__description {
+  opacity: 0.5;
+}
+li .task-item.checked .task-item__description h2 {
+  text-decoration: line-through;
+}
+li .task-item.checked .task-item__actions button {
+  opacity: 0.5;
+}
+li .task-item.checked .task-item__actions button:hover {
+  opacity: 1;
+}
+li .task-item .task-item__description {
+  flex: 4;
+  margin: 0 15px;
+  font-size: 15px;
+  font-family: monospace;
+  transition: all 0.25s ease-in-out;
+}
+li .task-item .task-item__actions {
+  transition: all 0.25s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+}
+li .task-item .task-item__actions button {
+  padding: 0.5em;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  flex: 1;
+  max-width: 40%;
+  transition: all 0.25s ease-in-out;
+  cursor: pointer;
+}
+li .task-item .task-item__actions button i {
+  font-size: 1.5em;
+}
+li .task-item .task-item__actions button.complete {
+  background: linear-gradient(to right, #3fb93f, #68d43d);
+}
+li .task-item .task-item__actions button.undo {
+  background: linear-gradient(to right, #b9803f, #d49f3d);
+}
+li .task-item .task-item__actions button.delete {
+  background: linear-gradient(to right, #f33b3b, #f0565e);
+}

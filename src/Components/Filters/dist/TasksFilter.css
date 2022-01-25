@@ -1,0 +1,14 @@
+.tasks-filter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.tasks-filter .tasks-filter__control {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  border: 1px solid red;
+  padding: 0.25em;
+  border-radius: 5px;
+}

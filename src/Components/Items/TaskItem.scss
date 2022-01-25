@@ -1,0 +1,91 @@
+li {
+    margin: 10px 0;
+
+    .task-item {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 1em 1em;
+        border-radius: 5px;
+        color: white;
+        align-items: center;
+
+        &.deleted {
+
+            .task-item__actions button {
+                pointer-events: none;
+                border: 1px solid #999999;
+                background-color: #cccccc;
+                color: #666666;
+            }
+        }
+
+        &.checked {
+
+
+            .task-item__description {
+                opacity: 0.5;
+
+                h2 {
+                    text-decoration: line-through;
+
+                }
+            }
+
+            .task-item__actions {
+                button {
+                    opacity: 0.5;
+
+                    &:hover {
+                        opacity: 1;
+                    }
+                }
+
+            }
+        }
+
+        .task-item__description {
+            flex: 4;
+            margin: 0 15px;
+            font-size: 15px;
+            font-family: monospace;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .task-item__actions {
+            transition: all 0.25s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+
+            button {
+                padding: 0.5em;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                flex: 1;
+                max-width: 40%;
+                transition: all 0.25s ease-in-out;
+
+                i {
+                    font-size: 1.5em;
+                }
+
+                cursor: pointer;
+
+                &.complete {
+                    background: linear-gradient(to right, #3fb93f, #68d43d);
+                }
+
+                &.undo {
+                    background: linear-gradient(to right, #b9803f, #d49f3d);
+                }
+
+                &.delete {
+                    background: linear-gradient(to right, #f33b3b, #f0565e);
+                }
+            }
+        }
+    }
+}
