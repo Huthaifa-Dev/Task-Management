@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import TasksFilter from "./Components/Filters/TasksFilter";
 import Tasks from "./Components/Items/Tasks";
-
 import TaskForm from "./Components/NewItem/TaskForm";
 import './css/all.css';
+import './App.css';
 
 function App() {
   const DUMP_TASKS = [
@@ -17,9 +17,8 @@ function App() {
     }
   ];
 
-  const DUMP_DELETED = [];
+
   const [tasks, setTasks] = useState(DUMP_TASKS);
-  const [deleted, setDeleted] = useState(DUMP_DELETED);
   const [filter, setFilter] = useState('all');
 
   const transferData = (data) => {
@@ -30,13 +29,12 @@ function App() {
 
   const deleteHandle = (input) => {
     var index = tasks.indexOf(input);
-
     if (index !== -1) {
-      setTasks(tasks.filter(task => task.title !== input.title));
-      setDeleted((prevDeleted) => {
-        console.log(input);
-        return [input, ...prevDeleted];
+      const newTasks = tasks.map((task) => {
+        task.state = task.title === input.title ? 'deleted' : task.state;
+        return task;
       })
+      setTasks(newTasks);
 
     }
   }
@@ -46,11 +44,11 @@ function App() {
   }
 
   return (
-    <div>
+    <React.Fragment>
       <TaskForm data={transferData} />
       <TasksFilter onFilterChange={filterHandler} />
-      <Tasks tasks={tasks} delete={deleteHandle} state={filter} deleted={deleted} />
-    </div>
+      <Tasks tasks={tasks} delete={deleteHandle} state={filter} />
+    </React.Fragment>
   );
 }
 

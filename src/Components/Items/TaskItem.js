@@ -5,35 +5,16 @@ import './dist/TaskItem.css';
 
 const TaskItem = (props) => {
     const [state, setState] = useState(props.task.state);
-
+    // const [deleted,setDeleted] = useState(false);
     const completeHandler = () => {
-
-        if (state === 'checked') {
-            setState(() => {
-                props.task.state = 'available';
-                return 'available';
-            });
-
-        } else {
-            setState(() => {
-                props.task.state = 'checked';
-                return 'checked';
-            });
-
-        }
-
-
+        state === 'checked' ? setState('available') : setState('checked');
     }
 
     const deleteHandler = () => {
-        setState(() => {
-            props.task.state = 'deleted';
-            console.log(state)
-            return 'deleted';
-        });
+        setState('deleted');
         props.delete(props.task);
-    }
 
+    }
 
     return (
         <li>
