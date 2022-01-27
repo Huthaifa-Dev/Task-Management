@@ -1,4 +1,4 @@
-import './dist/TasksFilter.css';
+import styles from './TasksFilter.module.scss';
 
 const TasksFilter = (props) => {
     const changeHandler = (event) => {
@@ -6,8 +6,8 @@ const TasksFilter = (props) => {
     };
 
     return (
-        <div className="tasks-filter">
-            <div className="tasks-filter__control">
+        <div className={styles["tasks-filter"]}>
+            <div className={styles.control}>
                 <label>Filter by State</label>
                 <select value={props.selected} onChange={changeHandler}>
                     <option value="all">All tasks</option>

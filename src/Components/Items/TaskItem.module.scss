@@ -11,50 +11,29 @@ li {
         border: 1px solid #ccc;
         border-radius: 10px;
 
-        .todo-item__body {
+        .body {
             padding: 20px 15px;
 
-            .todo-item__title {
+            .title {
                 margin-bottom: 10px;
                 font-size: 1.25em;
                 font-weight: 700;
             }
 
-            .todo-item__description {
+            .description {
                 color: #999;
                 font-weight: 500;
                 margin-bottom: 15px;
 
             }
 
-            .todo-item__tags {
+            .tags {
                 display: flex;
 
-                .todo-item__tag {
-                    padding: 0.25em 0.5em;
-                    border-radius: 5px;
-                    font-weight: 600;
-
-                    &.research {
-                        color: rgb(165, 80, 255);
-                        background-color: rgba(200, 150, 255, 0.25);
-                    }
-
-                    &.uidesign {
-                        color: rgb(38, 52, 255);
-                        background-color: rgba(150, 174, 255, 0.25);
-
-                    }
-
-                    &.planning {
-                        color: rgb(77, 172, 0);
-                        background-color: rgba(167, 255, 150, 0.25);
-                    }
-                }
             }
         }
 
-        .todo-item__footer {
+        .footer {
             border-top: 1px solid #ccc;
             padding: 0.75em;
 

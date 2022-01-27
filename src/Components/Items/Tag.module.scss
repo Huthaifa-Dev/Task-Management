@@ -1,0 +1,21 @@
+.tag {
+    padding: 0.25em 0.5em;
+    border-radius: 5px;
+    font-weight: 600;
+
+    &.research {
+        color: rgb(165, 80, 255);
+        background-color: rgba(200, 150, 255, 0.25);
+    }
+
+    &.uidesign {
+        color: rgb(38, 52, 255);
+        background-color: rgba(150, 174, 255, 0.25);
+
+    }
+
+    &.planning {
+        color: rgb(77, 172, 0);
+        background-color: rgba(167, 255, 150, 0.25);
+    }
+}

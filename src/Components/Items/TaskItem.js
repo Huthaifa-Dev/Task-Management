@@ -1,32 +1,31 @@
 import { useState } from 'react';
 import Card from '../UI/Card';
-import './dist/TaskItem.css';
+import styles from './TaskItem.module.scss';
 import { AiOutlineComment, AiOutlineLink, AiOutlineCalendar } from "react-icons/ai";
 import Tag from './Tag';
 
 const TaskItem = (props) => {
     const [state, setState] = useState(props.task.state);
 
-
     return (
         <li>
-            <Card className={`todo-item`}>
-                <div className='todo-item__body'>
-                    <h2 className='todo-item__title'>{props.task.title}</h2>
-                    <p className='todo-item__description'>{props.task.description}</p>
-                    <div className='todo-item__tags'>
+            <Card className={styles['todo-item']}>
+                <div className={styles.body}>
+                    <h2 className={styles.title}>{props.task.title}</h2>
+                    <p className={styles.description}>{props.task.description}</p>
+                    <div className={styles.tags}>
                         <Tag tag={props.task.tag} />
                     </div>
                 </div>
-                <div className='todo-item__footer'>
+                <div className={styles.footer}>
 
-                    <div className="comments">
+                    <div className={styles.comments}>
                         <AiOutlineComment /> <p>3</p>
                     </div>
-                    <div className="attachments">
+                    <div className={styles.attachments}>
                         <AiOutlineLink /> <p>8</p>
                     </div>
-                    <div className="status">
+                    <div className={styles.status}>
                         <AiOutlineCalendar /> <p>Nov 23</p>
                     </div>
                 </div>

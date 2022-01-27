@@ -5,11 +5,11 @@
     padding: 10px;
     max-width: 325px;
 
-    .state-title {
+    .title {
         font-size: 1.25em;
         padding-bottom: 15px;
 
-        .tasks-counter {
+        .counter {
             font-size: 0.85em;
             font-weight: 700;
             margin-left: 10px;
@@ -42,7 +42,7 @@
         }
     }
 
-    .task-list {
+    .list {
         list-style: none;
         padding: 25px 0;
     }

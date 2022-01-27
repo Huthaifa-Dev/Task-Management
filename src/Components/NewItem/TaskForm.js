@@ -1,5 +1,5 @@
 import { useState } from "react";
-import './dist/TaskForm.css';
+import styles from './TaskForm.module.scss';
 
 const TaskForm = (props) => {
     const [enteredTitle, setTitle] = useState('');
@@ -19,8 +19,8 @@ const TaskForm = (props) => {
 
     return (
         <form onSubmit={submitHandler}>
-            <div className="task-form__controls">
-                <div className="task-form__control">
+            <div className={styles.controls}>
+                <div className={styles.control}>
                     <label>Task</label>
                     <input
                         type='text'
@@ -29,7 +29,7 @@ const TaskForm = (props) => {
                         onChange={titleChangeHandler}
                     />
                 </div>
-                <div className="task-form__actions">
+                <div className={styles.actions}>
                     <button type="submit">Add</button>
                 </div>
             </div>
