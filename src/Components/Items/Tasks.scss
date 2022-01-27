@@ -1,6 +1,49 @@
-.task-list {
+.tasks-box {
     display: flex;
     flex-direction: column;
-    list-style: none;
-    padding: 25px 50px;
+    // border: 5px solid black;
+    padding: 10px;
+    max-width: 325px;
+
+    .state-title {
+        font-size: 1.25em;
+        padding-bottom: 15px;
+
+        .tasks-counter {
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-left: 10px;
+            color: #777;
+            background-color: white;
+            padding: 0.1em 0.65em;
+            border: 1px solid #ccc;
+            border-radius: 50px;
+        }
+
+    }
+
+    hr {
+        border-radius: 3px;
+
+        &.todo {
+            border: 1px solid #111;
+        }
+
+        &.inwork {
+            border: 1px solid rgb(48, 97, 255);
+        }
+
+        &.qa {
+            border: 1px solid rgb(228, 156, 23);
+        }
+
+        &.completed {
+            border: 1px solid rgb(20, 187, 4);
+        }
+    }
+
+    .task-list {
+        list-style: none;
+        padding: 25px 0;
+    }
 }

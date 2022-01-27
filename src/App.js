@@ -2,24 +2,40 @@ import React, { useState } from "react";
 import TasksFilter from "./Components/Filters/TasksFilter";
 import Tasks from "./Components/Items/Tasks";
 import TaskForm from "./Components/NewItem/TaskForm";
-import './css/all.css';
+
 import './App.css';
+import NewTask from "./Components/NewItem/NewTask";
 
 function App() {
   const DUMP_TASKS = [
     {
-      'title': 'Complete Dailies',
-      'state': 'available'
+      'title': 'UX Adjustments',
+      'tag': 'Research',
+      'description': 'It just needs to adabt the UI from what you did before.',
+      'state': 'todo'
     },
     {
-      'title': 'Empty Resin',
-      'state': 'checked'
+      'title': 'Design System',
+      'tag': 'UI Design',
+      'description': 'Create a consistent look and feel both on weeb and mobile.',
+      'state': 'qa'
+    },
+    {
+      'title': 'Presentation',
+      'tag': 'Planning',
+      'description': 'Help businesses to clearly define their annual e-commerce digital strategy by creating a high-level plan.',
+      'state': 'completed'
+    },
+    {
+      'title': 'Moodboards',
+      'tag': 'UI Design',
+      'description': 'Add a field in the portal to let the user connect their Slack account.',
+      'state': 'in work'
     }
   ];
 
 
   const [tasks, setTasks] = useState(DUMP_TASKS);
-  const [filter, setFilter] = useState('all');
 
   const transferData = (data) => {
     setTasks((prevTasks) => {
@@ -27,27 +43,16 @@ function App() {
     })
   }
 
-  const deleteHandle = (input) => {
-    var index = tasks.indexOf(input);
-    if (index !== -1) {
-      const newTasks = tasks.map((task) => {
-        task.state = task.title === input.title ? 'deleted' : task.state;
-        return task;
-      })
-      setTasks(newTasks);
-
-    }
-  }
-
-  const filterHandler = (filterInput) => {
-    setFilter(filterInput);
-  }
-
   return (
     <React.Fragment>
-      <TaskForm data={transferData} />
-      <TasksFilter onFilterChange={filterHandler} />
-      <Tasks tasks={tasks} delete={deleteHandle} state={filter} />
+      <div className="temp-nav"></div>
+      <div className="todo-states">
+        <Tasks tasks={tasks} state={'todo'} />
+        <Tasks tasks={tasks} state={'in work'} />
+        <Tasks tasks={tasks} state={'qa'} />
+        <Tasks tasks={tasks} state={'completed'} />
+      </div>
+      <NewTask />
     </React.Fragment>
   );
 }
