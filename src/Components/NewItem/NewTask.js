@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Button from '../UI/Button';
 import { BiMessageSquareAdd } from "react-icons/bi";
 import styles from './NewTask.module.scss';
@@ -9,9 +9,16 @@ const NewTask = (props) => {
     const taskHandler = () => {
         active ? setActive(false) : setActive(true);
     }
+    const dataHandler = (input) => {
+        props.dataHandler(input);
+    }
+
     return (
-        active ? <Button className={styles.action} onClick={taskHandler}><BiMessageSquareAdd /> <p>New Task</p></Button>
-            : <TaskForm />
+        <React.Fragment>
+            {active && <Button className={styles.action} onClick={taskHandler}><BiMessageSquareAdd /> <p>New Task</p></Button>}
+            {!active && <TaskForm onClick={taskHandler} data={dataHandler} />}
+        </React.Fragment>
+
 
     )
 

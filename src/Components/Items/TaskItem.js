@@ -6,7 +6,9 @@ import Tag from './Tag';
 
 const TaskItem = (props) => {
     const [state, setState] = useState(props.task.state);
-
+    const month = props.task.date.toLocaleString("en-US", { month: "short" });
+    const day = props.task.date.toLocaleString("en-US", { day: "2-digit" });
+    console.log(props);
     return (
         <li>
             <Card className={styles['todo-item']}>
@@ -26,7 +28,8 @@ const TaskItem = (props) => {
                         <AiOutlineLink /> <p>8</p>
                     </div>
                     <div className={styles.status}>
-                        <AiOutlineCalendar /> <p>Nov 23</p>
+                        <AiOutlineCalendar />
+                        <p>{day + ' ' + month}</p>
                     </div>
                 </div>
             </Card>

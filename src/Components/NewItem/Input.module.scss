@@ -1,0 +1,40 @@
+.container {
+    // border: 1px solid red;
+    padding: 0.5em 0;
+    color: #333;
+
+    label {
+        font-size: large;
+        font-weight: 500;
+
+    }
+
+    .input {
+        margin-top: 0.5em;
+        display: flex;
+        padding: 0.25em 0.35em;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+
+        input {
+            padding: 0.25em 0.25em;
+            border: none;
+            outline: none;
+            background-color: #f5f5f5;
+            flex: 1;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        button {
+            color: black;
+            background-color: white;
+            border: 1px solid #ccc;
+            font-size: 0.75em;
+            padding: 0.25em 0.5em;
+            border-radius: 5px;
+        }
+
+    }
+}

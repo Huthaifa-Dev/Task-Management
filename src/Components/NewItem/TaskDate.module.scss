@@ -1,0 +1,16 @@
+.task-date {
+    display: flex;
+    gap: 2%;
+    // border: 1px solid red;
+    align-items: stretch;
+
+    input {
+        flex: 1;
+
+
+
+        &.date {
+            flex: 2;
+        }
+    }
+}

@@ -11,3 +11,7 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
+
+button p {
+    margin-left: 0.25em;
+}
