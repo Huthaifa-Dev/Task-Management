@@ -1,16 +1,21 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import styles from './Input.module.scss';
-
+import { AiFillCloseCircle } from "react-icons/ai";
 const Input = React.forwardRef((props, ref) => {
     const InputRef = ref;
-    const classes = props.className + ' ' + styles.container;
+    const { title, error } = { ...props.input };
+    const [err, setError] = useState(error);
+
+    const classes = `${styles.container} ${error || !error === '' ? styles.error : ''}`;
+    console.log(props);
     return (
         <div className={classes}>
-            <label htmlFor={props.title}>{props.title}</label>
+            <label htmlFor={title}>{title}</label>
             <div className={styles.input}>
-                <input name={props.title} type={props.type} placeholder={props.placeholder} ref={InputRef} />
+                <input {...props.input} ref={InputRef} />
                 {props.children}
             </div>
+            {(error || !error === '') && <p><AiFillCloseCircle />{error}</p>}
         </div>
     )
 })

@@ -1,61 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Tasks from "./Components/Items/Tasks";
 
 import './App.css';
 import NewTask from "./Components/NewItem/NewTask";
+import TaskProvider from "./store/TaskProvider";
+import TaskForm from "./Components/NewItem/TaskForm";
 
 function App() {
-  const DUMP_TASKS = [
-    {
-      title: 'UX Adjustments',
-      tag: 'Research',
-      description: 'It just needs to adabt the UI from what you did before.',
-      state: 'todo',
-      date: new Date(2021, 2, 28)
-    },
-    {
-      title: 'Design System',
-      tag: 'UI Design',
-      description: 'Create a consistent look and feel both on weeb and mobile.',
-      state: 'qa',
-      date: new Date(2021, 2, 28)
-    },
-    {
-      title: 'Presentation',
-      tag: 'Planning',
-      description: 'Help businesses to clearly define their annual e-commerce digital strategy by creating a high-level plan.',
-      state: 'completed',
-      date: new Date(2021, 2, 28)
-    },
-    {
-      title: 'Moodboards',
-      tag: 'UI Design',
-      description: 'Add a field in the portal to let the user connect their Slack account.',
-      state: 'in work',
-      date: new Date(2021, 2, 28)
-    }
-  ];
+  const [formActive, setFormActive] = useState(false);
 
-
-  const [tasks, setTasks] = useState(DUMP_TASKS);
-
-  const transferData = (data) => {
-    setTasks((prevTasks) => {
-      return [data, ...prevTasks];
-    })
+  const formClickHandler = () => {
+    setFormActive((prevState) => !prevState);
   }
 
+
+
   return (
-    <React.Fragment>
+    <TaskProvider>
       <div className="temp-nav"></div>
       <div className="todo-states">
-        <Tasks tasks={tasks} state={'todo'} />
-        <Tasks tasks={tasks} state={'in work'} />
-        <Tasks tasks={tasks} state={'qa'} />
-        <Tasks tasks={tasks} state={'completed'} />
+        <Tasks state={'todo'} title='TODO' />
+        <Tasks state={'inwork'} title='IN WORK' />
+        <Tasks state={'qa'} title='QA' />
+        <Tasks state={'completed'} title='COMPLETED' />
       </div>
-      <NewTask dataHandler={transferData} />
-    </React.Fragment>
+      {!formActive ?
+        <NewTask onClick={formClickHandler} /> :
+        <TaskForm onClick={formClickHandler} />}
+    </TaskProvider>
   );
 }
 

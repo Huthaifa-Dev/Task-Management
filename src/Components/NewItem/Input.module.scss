@@ -37,4 +37,36 @@
         }
 
     }
+
+    p {
+        font-size: 0.85em;
+        display: flex;
+        align-items: center;
+
+        svg {
+            margin-top: 0.25em;
+            margin-right: 10px;
+        }
+    }
+
+}
+
+.error {
+    .input {
+        border: 1px solid rgb(158, 20, 20);
+    }
+
+    p {
+        color: rgb(158, 20, 20);
+    }
+}
+
+.waarning {
+    .input {
+        border: 1px solid rgb(158, 121, 20);
+    }
+
+    p {
+        color: rgb(158, 121, 20);
+    }
 }
