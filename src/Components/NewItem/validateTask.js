@@ -1,3 +1,4 @@
+
 let errors = {
     title: '',
     tag: '',
@@ -5,7 +6,7 @@ let errors = {
     date: ''
 };
 export const validate = (info, addDesc) => {
-
+    console.log(info);
     const { title, tag, description, date } = info;
 
     if (!title || title.trim().length === 0) {
@@ -26,7 +27,7 @@ export const validate = (info, addDesc) => {
         errors.description = '';
     }
 
-    if (date instanceof Date && isNaN(date)) {
+    if ((date instanceof Date && isNaN(date)) || date === '') {
         errors.date = 'Date is required';
     } else {
         errors.date = '';
@@ -35,6 +36,4 @@ export const validate = (info, addDesc) => {
     return errors;
 }
 
-export const empty = () => {
-    return errors.title === '' && errors.tag === '' && errors.description === '' && errors.date === '';
-}
+export default validate;

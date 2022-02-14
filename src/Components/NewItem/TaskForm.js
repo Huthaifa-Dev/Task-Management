@@ -5,23 +5,49 @@ import styles from './TaskForm.module.scss';
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import Modal from "../UI/Modal";
 import TaskContext from "../../store/task-context";
-import { empty, validate } from "./validateTask";
+import validate from "./validateTask";
+import Card from "../UI/Card";
+import Tag from "../Items/Tag";
+import TagForm from "./TagForm";
 
 
 
 
+const empty = errors => {
+    return errors.title === '' || errors.tag === '' || errors.description === '' || errors.date === '';
+}
 
 const FormOverlay = props => {
-
+    console.log('runned')
     const taskCtx = useContext(TaskContext);
-
+    const [data, setData] = useState({
+        title: '',
+        tag: '',
+        description: '',
+        date: ''
+    });
+    const [errors, setErrors] = useState({
+        title: '',
+        tag: '',
+        description: '',
+        date: ''
+    });
     const [addDesc, setAddDesc] = useState(false);
-    const [errors, setErrors] = useState(false);
 
-    const titleInput = useRef();
-    const tagInput = useRef();
-    const dateInput = useRef();
-    const descInput = useRef();
+
+    const dataHandler = event => {
+
+        setData((prevData) => {
+            return {
+                ...prevData,
+                [event.target.name]: event.target.value
+            }
+        })
+        setErrors(() => {
+            return validate(data, addDesc);
+        })
+        console.log(event.target.value, data)
+    }
 
     const addDescClickHandle = () => {
         setAddDesc((prevState) => !prevState);
@@ -29,27 +55,21 @@ const FormOverlay = props => {
 
     const formSubmitHandle = (e) => {
         e.preventDefault();
-        const enteredTitle = titleInput.current.value;
-        const enteredTag = tagInput.current.value;
-        const enteredDesc = addDesc ? descInput.current.value : '';
-        const enteredDate = new Date(dateInput.current.value);
         const task = {
-            'title': enteredTitle,
-            'tag': enteredTag,
-            'description': `${addDesc ? enteredDesc : ''}`,
+            'title': data.title,
+            'tag': data.tag,
+            'description': `${addDesc ? data.description : ''}`,
             'state': 'todo',
-            'date': enteredDate
+            'date': new Date(data.date)
         }
         // console.log(enteredDate);
-        const valid = validate(task, addDesc);
-        // console.log(valid, empty(), addDesc);
+        const valid = validate(data, addDesc);
 
-        if (empty()) {
+        if (!empty(errors)) {
             taskCtx.addTask(task);
             props.onClick();
         } else {
             setErrors(valid);
-            console.log(valid)
             return
         }
 
@@ -59,12 +79,14 @@ const FormOverlay = props => {
         <form onSubmit={formSubmitHandle}>
             <h2>Create Task</h2>
             <div className={styles.controls}>
-                <Input ref={titleInput}
+                <Input
                     input={{
+                        name: 'title',
                         title: 'Title',
                         type: 'text',
                         placeholder: 'Task Title',
-                        error: errors.title
+                        error: errors.title,
+                        onChange: dataHandler
                     }}
                 >
                     {!addDesc ?
@@ -78,32 +100,39 @@ const FormOverlay = props => {
                     }
                 </Input>
                 {addDesc ?
-                    <Input ref={descInput}
+                    <Input
                         input={{
+                            name: 'description',
                             title: 'Description',
                             type: 'text-area',
                             placeholder: 'Type a description ...',
-                            error: errors.description
+                            error: errors.description,
+                            onChange: dataHandler
                         }}
                     /> : ''}
 
-                <Input ref={tagInput}
+                {/* <Input
                     input={{
+                        name: 'tag',
                         title: 'Tag',
                         type: 'text',
                         placeholder: 'Add tag',
-                        error: errors.tag
+                        error: errors.tag,
+                        onChange: dataHandler
                     }}
                 >
                     <Button><GrFormAdd /> <p>Add Tag</p></Button>
-                </Input>
+                </Input> */}
+                <TagForm />
 
                 <div className={styles.date}>
-                    <Input ref={dateInput}
+                    <Input
                         input={{
+                            name: 'date',
                             title: 'Date',
                             type: 'date',
-                            error: errors.date
+                            error: errors.date,
+                            onChange: dataHandler
                         }}
                     />
                     <Input
@@ -129,7 +158,10 @@ const TaskForm = (props) => {
 
     return (
         <Modal onClick={props.onClick}>
-            <FormOverlay {...props} />
+            <Card>
+                <FormOverlay {...props} />
+            </Card>
+
         </Modal>
     )
 }

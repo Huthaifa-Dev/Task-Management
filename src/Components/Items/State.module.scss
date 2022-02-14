@@ -1,0 +1,15 @@
+.status {
+    justify-self: flex-end;
+
+    .date {}
+
+    .like {
+        background: none;
+        padding: 0;
+        color: #777;
+    }
+
+    .completed {
+        color: rgb(77, 172, 0);
+    }
+}

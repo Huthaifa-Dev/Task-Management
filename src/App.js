@@ -24,9 +24,8 @@ function App() {
         <Tasks state={'qa'} title='QA' />
         <Tasks state={'completed'} title='COMPLETED' />
       </div>
-      {!formActive ?
-        <NewTask onClick={formClickHandler} /> :
-        <TaskForm onClick={formClickHandler} />}
+      {!formActive && <NewTask onClick={formClickHandler} />}
+      {formActive && <TaskForm onClick={formClickHandler} />}
     </TaskProvider>
   );
 }

@@ -1,14 +1,12 @@
-import { useState } from 'react';
-import Card from '../UI/Card';
+
 import styles from './TaskItem.module.scss';
-import { AiOutlineComment, AiOutlineLink, AiOutlineCalendar } from "react-icons/ai";
+import { AiOutlineComment, AiOutlineLink } from "react-icons/ai";
 import Tag from './Tag';
 import Draggable from '../UI/Draggable';
+import State from './State';
 
 const TaskItem = (props) => {
-    const [state, setState] = useState(props.task.state);
-    const month = props.task.date.toLocaleString("en-US", { month: "short" });
-    const day = props.task.date.toLocaleString("en-US", { day: "2-digit" });
+    const { state, date } = props.task;
 
     const clickHandle = (event) => {
         console.log(event.target);
@@ -16,6 +14,7 @@ const TaskItem = (props) => {
     const dragStartHandle = event => {
         event.dataTransfer.setData('task', props.task.id);
     }
+
     return (
         <li >
             <Draggable onDragStart={dragStartHandle}>
@@ -35,10 +34,8 @@ const TaskItem = (props) => {
                         <div className={styles.attachments}>
                             <AiOutlineLink /> <p>8</p>
                         </div>
-                        <div className={styles.status}>
-                            <AiOutlineCalendar />
-                            <p>{day + ' ' + month}</p>
-                        </div>
+                        <State state={state} date={date} />
+
                     </div>
                 </div>
             </Draggable>

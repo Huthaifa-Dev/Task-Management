@@ -1,27 +1,37 @@
-.backdrop {
+.modal {
+    .backdrop {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+    }
+
+    .content {
+        z-index: 100;
+    }
+
     position: fixed;
-    top: 0;
-    left: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
     width: 100%;
-    height: 100vh;
-    z-index: 10;
     background: rgba($color: #ffff, $alpha: 0.5);
     backdrop-filter: blur(5px);
-}
-
-.modal {
-    position: fixed;
-    top: calc(50% - 15rem);
-    left: calc(50% - 15rem);
-    // transform: translate(-50%, -50%);
-    z-index: 100;
-    background-color: white;
-    padding: 1rem;
-    border-radius: 14px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     animation: slide-down 300ms ease-out forwards;
 }
 
+// .on {
+//     animation: slide-down 300ms ease-out forwards;
+// }
+
+// .off {
+//     animation: slide-up 300ms ease-out forwards;
+// }
 
 
 @keyframes slide-down {
@@ -33,5 +43,17 @@
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-3rem);
     }
 }

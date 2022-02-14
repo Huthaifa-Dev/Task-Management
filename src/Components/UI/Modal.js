@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
 import styles from './Modal.module.scss';
@@ -9,10 +9,11 @@ const Backdrop = (props) => {
 
 const ModalOverlay = (props) => {
     return (
-        <div className={styles.modal}>
-            <React.Fragment>
+        <div className={styles.modal} >
+            <Backdrop onClick={props.onClick} />
+            <div className={styles.content}>
                 {props.children}
-            </React.Fragment>
+            </div>
         </div>
     );
 };
@@ -20,11 +21,12 @@ const ModalOverlay = (props) => {
 const portalElement = document.getElementById('overlays');
 
 const Modal = (props) => {
+
     return (
         <Fragment>
-            {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, portalElement)}
+            {/* {ReactDOM.createPortal(<Backdrop onClick={props.onClick} />, portalElement)} */}
             {ReactDOM.createPortal(
-                <ModalOverlay>{props.children}</ModalOverlay>,
+                <ModalOverlay onClick={props.onClick}>{props.children}</ModalOverlay>,
                 portalElement
             )}
         </Fragment>
