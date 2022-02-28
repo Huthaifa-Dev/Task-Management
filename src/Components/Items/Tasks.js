@@ -9,7 +9,6 @@ const Tasks = (props) => {
     const state = props.state;
     const filteredTasks = taskCtx.tasks.filter(task => task.state === props.state);
 
-    const [tasks, setTasks] = useState(filteredTasks);
     const dragOverHandle = (event) => {
         // console.log(event);
         event.preventDefault();

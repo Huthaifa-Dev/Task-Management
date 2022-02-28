@@ -1,24 +1,71 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import Button from "../UI/Button";
 import Input from "./Input";
 import styles from './TaskForm.module.scss';
 import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import Modal from "../UI/Modal";
 import TaskContext from "../../store/task-context";
-import validate from "./validateTask";
 import Card from "../UI/Card";
-import Tag from "../Items/Tag";
 import TagForm from "./TagForm";
 
 
+const defaultErrorState = {
+    title: '',
+    tag: '',
+    description: 'empty',
+    date: '',
+    isValid: false
+}
 
+const errorReducer = (state, action) => {
+    // console.log(state)
+    if (action.type[0] === 'title') {
+        return {
+            ...state,
+            [action.type]: action.value.trim().length === 0 ? 'Title is required!' : ''
+        }
+    }
+    if (action.type[0] === 'tag') {
+        return {
+            ...state,
+            [action.type]: action.value.trim().length === 0 ? 'Tag is required!' : ''
+        }
+    }
+    if (action.type[0] === 'description') {
+        return {
+            ...state,
+            [action.type]: action.value.trim().length < 6 ? 'Description is required!' : ''
+        }
+    }
+    if (action.type[0] === 'date') {
+        return {
+            ...state,
+            [action.type]: action.value.trim().length === 0 ? 'Date is required!' : ''
+        }
+    }
+    if (action.type === 'CHECK') {
+        if (
+            state.title.trim().length === 0 &&
+            state.tag.trim().length === 0 &&
+            (state.description.trim().length === 0 || state.description === 'empty') &&
+            state.date.trim().length === 0
+        ) {
+            return {
+                ...state,
+                isValid: true
+            }
+        }
+        return {
+            ...state,
+            isValid: false
+        }
+    }
 
-const empty = errors => {
-    return errors.title === '' || errors.tag === '' || errors.description === '' || errors.date === '';
+    return defaultErrorState;
 }
 
 const FormOverlay = props => {
-    console.log('runned')
+    const [error, dispatchError] = useReducer(errorReducer, defaultErrorState);
     const taskCtx = useContext(TaskContext);
     const [data, setData] = useState({
         title: '',
@@ -26,51 +73,46 @@ const FormOverlay = props => {
         description: '',
         date: ''
     });
-    const [errors, setErrors] = useState({
-        title: '',
-        tag: '',
-        description: '',
-        date: ''
-    });
     const [addDesc, setAddDesc] = useState(false);
 
-
     const dataHandler = event => {
-
-        setData((prevData) => {
-            return {
-                ...prevData,
-                [event.target.name]: event.target.value
-            }
-        })
-        setErrors(() => {
-            return validate(data, addDesc);
-        })
-        console.log(event.target.value, data)
+        setData({
+            ...data,
+            [event.target.name]: event.target.value
+        }
+        );
+        dispatchError({ type: [event.target.name], value: event.target.value });
+        dispatchError({ type: 'CHECK' });
     }
 
     const addDescClickHandle = () => {
         setAddDesc((prevState) => !prevState);
     }
+    const passTag = (tag) => {
+        setData({
+            ...data,
+            tag: tag
+        });
+        dispatchError({ type: 'tag', value: tag });
+        dispatchError({ type: 'CHECK' });
+    }
 
     const formSubmitHandle = (e) => {
         e.preventDefault();
+        dispatchError({ type: 'CHECK' });
         const task = {
             'title': data.title,
             'tag': data.tag,
-            'description': `${addDesc ? data.description : ''}`,
+            'description': data.description,
             'state': 'todo',
             'date': new Date(data.date)
         }
-        // console.log(enteredDate);
-        const valid = validate(data, addDesc);
-
-        if (!empty(errors)) {
+        console.log(error);
+        if (error.isValid) {
             taskCtx.addTask(task);
             props.onClick();
         } else {
-            setErrors(valid);
-            return
+            return;
         }
 
     }
@@ -85,7 +127,7 @@ const FormOverlay = props => {
                         title: 'Title',
                         type: 'text',
                         placeholder: 'Task Title',
-                        error: errors.title,
+                        error: error.title,
                         onChange: dataHandler
                     }}
                 >
@@ -106,7 +148,7 @@ const FormOverlay = props => {
                             title: 'Description',
                             type: 'text-area',
                             placeholder: 'Type a description ...',
-                            error: errors.description,
+                            error: error.description,
                             onChange: dataHandler
                         }}
                     /> : ''}
@@ -117,13 +159,13 @@ const FormOverlay = props => {
                         title: 'Tag',
                         type: 'text',
                         placeholder: 'Add tag',
-                        error: errors.tag,
+                        error: error.tag,
                         onChange: dataHandler
                     }}
                 >
                     <Button><GrFormAdd /> <p>Add Tag</p></Button>
                 </Input> */}
-                <TagForm />
+                <TagForm passData={passTag} />
 
                 <div className={styles.date}>
                     <Input
@@ -131,7 +173,7 @@ const FormOverlay = props => {
                             name: 'date',
                             title: 'Date',
                             type: 'date',
-                            error: errors.date,
+                            error: error.date,
                             onChange: dataHandler
                         }}
                     />

@@ -3,7 +3,7 @@ import styles from './Input.module.scss';
 import { AiFillCloseCircle } from "react-icons/ai";
 const Input = props => {
     const { title, error } = { ...props.input };
-    console.log(props.input.name, error);
+    // console.log(props.input.name, error);
     const classes = `${styles.container} ${error || !error === '' ? styles.error : ''}`;
     return (
         <div className={classes}>

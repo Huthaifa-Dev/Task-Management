@@ -40,6 +40,7 @@ const defaultTasksState = {
 const taskReducer = (state, action) => {
     if (action.type === 'ADD') {
         const task = action.value;
+        task.id = state.tasks.length + 1;
         const updatedTasks = state.tasks.concat(task);
         return {
             tasks: updatedTasks
