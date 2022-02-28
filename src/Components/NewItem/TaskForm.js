@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../UI/Button";
 import Input from "./Input";
 import styles from './TaskForm.module.scss';
@@ -7,65 +7,39 @@ import Modal from "../UI/Modal";
 import TaskContext from "../../store/task-context";
 import Card from "../UI/Card";
 import TagForm from "./TagForm";
+import useInput from "../../hooks/use-input";
 
 
-const defaultErrorState = {
-    title: '',
-    tag: '',
-    description: 'empty',
-    date: '',
-    isValid: false
-}
-
-const errorReducer = (state, action) => {
-    // console.log(state)
-    if (action.type[0] === 'title') {
-        return {
-            ...state,
-            [action.type]: action.value.trim().length === 0 ? 'Title is required!' : ''
-        }
-    }
-    if (action.type[0] === 'tag') {
-        return {
-            ...state,
-            [action.type]: action.value.trim().length === 0 ? 'Tag is required!' : ''
-        }
-    }
-    if (action.type[0] === 'description') {
-        return {
-            ...state,
-            [action.type]: action.value.trim().length < 6 ? 'Description is required!' : ''
-        }
-    }
-    if (action.type[0] === 'date') {
-        return {
-            ...state,
-            [action.type]: action.value.trim().length === 0 ? 'Date is required!' : ''
-        }
-    }
-    if (action.type === 'CHECK') {
-        if (
-            state.title.trim().length === 0 &&
-            state.tag.trim().length === 0 &&
-            (state.description.trim().length === 0 || state.description === 'empty') &&
-            state.date.trim().length === 0
-        ) {
-            return {
-                ...state,
-                isValid: true
-            }
-        }
-        return {
-            ...state,
-            isValid: false
-        }
-    }
-
-    return defaultErrorState;
-}
 
 const FormOverlay = props => {
-    const [error, dispatchError] = useReducer(errorReducer, defaultErrorState);
+    const validate = value => value.trim() !== '';
+
+
+
+    const {
+        value: enteredTitle,
+        isValid: titleIsValid,
+        hasError: titleHasError,
+        valueChangeHandler: titleChangeHandler,
+        inputBlurHandler: titleBlurHandler
+    } = useInput(validate);
+    const {
+        value: enteredDesc,
+        isValid: descIsValid,
+        hasError: descHasError,
+        valueChangeHandler: descChangeHandler,
+        inputBlurHandler: descBlurHandler
+    } = useInput(validate);
+    const {
+        value: enteredDate,
+        isValid: dateIsValid,
+        hasError: dateHasError,
+        valueChangeHandler: dateChangeHandler,
+        inputBlurHandler: dateBlurHandler
+    } = useInput(validate);
+
+    const formIsValid = titleIsValid && descIsValid && dateIsValid;
+
     const taskCtx = useContext(TaskContext);
     const [data, setData] = useState({
         title: '',
@@ -75,45 +49,16 @@ const FormOverlay = props => {
     });
     const [addDesc, setAddDesc] = useState(false);
 
-    const dataHandler = event => {
-        setData({
-            ...data,
-            [event.target.name]: event.target.value
-        }
-        );
-        dispatchError({ type: [event.target.name], value: event.target.value });
-        dispatchError({ type: 'CHECK' });
-    }
 
     const addDescClickHandle = () => {
         setAddDesc((prevState) => !prevState);
     }
-    const passTag = (tag) => {
-        setData({
-            ...data,
-            tag: tag
-        });
-        dispatchError({ type: 'tag', value: tag });
-        dispatchError({ type: 'CHECK' });
-    }
+
 
     const formSubmitHandle = (e) => {
         e.preventDefault();
-        dispatchError({ type: 'CHECK' });
-        const task = {
-            'title': data.title,
-            'tag': data.tag,
-            'description': data.description,
-            'state': 'todo',
-            'date': new Date(data.date)
-        }
-        console.log(error);
-        if (error.isValid) {
-            taskCtx.addTask(task);
-            props.onClick();
-        } else {
-            return;
-        }
+
+        console.log(descIsValid);
 
     }
 
@@ -124,12 +69,13 @@ const FormOverlay = props => {
                 <Input
                     input={{
                         name: 'title',
+                        value: enteredTitle,
                         title: 'Title',
                         type: 'text',
                         placeholder: 'Task Title',
-                        error: error.title,
-                        onChange: dataHandler
-                    }}
+                        onChange: titleChangeHandler,
+                        onBlur: titleBlurHandler
+                    }} error={titleHasError}
                 >
                     {!addDesc ?
                         <Button onClick={addDescClickHandle}>
@@ -145,37 +91,27 @@ const FormOverlay = props => {
                     <Input
                         input={{
                             name: 'description',
+                            value: enteredDesc,
                             title: 'Description',
                             type: 'text-area',
                             placeholder: 'Type a description ...',
-                            error: error.description,
-                            onChange: dataHandler
-                        }}
+                            onChange: descChangeHandler,
+                            onBlur: descBlurHandler
+                        }} error={descHasError}
                     /> : ''}
-
-                {/* <Input
-                    input={{
-                        name: 'tag',
-                        title: 'Tag',
-                        type: 'text',
-                        placeholder: 'Add tag',
-                        error: error.tag,
-                        onChange: dataHandler
-                    }}
-                >
-                    <Button><GrFormAdd /> <p>Add Tag</p></Button>
-                </Input> */}
-                <TagForm passData={passTag} />
+                {/* <TagForm  /> */}
 
                 <div className={styles.date}>
                     <Input
                         input={{
                             name: 'date',
+                            value: enteredDate,
                             title: 'Date',
                             type: 'date',
-                            error: error.date,
-                            onChange: dataHandler
-                        }}
+
+                            onChange: dateChangeHandler,
+                            onBlur: dateBlurHandler
+                        }} error={dateHasError}
                     />
                     <Input
                         input={{

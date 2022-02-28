@@ -54,6 +54,11 @@
 .error {
     .input {
         border: 1px solid rgb(158, 20, 20);
+        background-color: rgb(243, 215, 215);
+
+        input {
+            background-color: inherit;
+        }
     }
 
     p {
