@@ -81,7 +81,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/Huthaifa-Dev"><img src="https://avatars.githubusercontent.com/u/62269745?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Huthaifa Salman</b></sub></a><br /><a href="#design-Huthaifa-Dev" title="Design">🎨</a></td>
+    <td align="center"><a href="https://github.com/Huthaifa-Dev"><img src="https://avatars.githubusercontent.com/u/62269745?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Huthaifa Salman</b></sub></a><br /><a href="#design-Huthaifa-Dev" title="Design">🎨</a> <a href="https://github.com/Huthaifa-Dev/Task-management/commits?author=Huthaifa-Dev" title="Code">💻</a></td>
   </tr>
 </table>
 
