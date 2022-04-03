@@ -1,4 +1,7 @@
 # Getting Started with Create React App
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -68,3 +71,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Huthaifa-Dev"><img src="https://avatars.githubusercontent.com/u/62269745?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Huthaifa Salman</b></sub></a><br /><a href="#design-Huthaifa-Dev" title="Design">🎨</a> <a href="https://github.com/Huthaifa-Dev/Task-management/commits?author=Huthaifa-Dev" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/Bshodeh"><img src="https://avatars.githubusercontent.com/u/64036214?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bshodeh</b></sub></a><br /><a href="#example-Bshodeh" title="Examples">💡</a></td>
+
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
