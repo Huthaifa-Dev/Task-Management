@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 100px 0;
+    background-color: #fac;
 }
 
 .temp-nav {

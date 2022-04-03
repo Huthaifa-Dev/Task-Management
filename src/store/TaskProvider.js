@@ -2,51 +2,24 @@ import React, { useReducer } from "react";
 import TaskContext from "./task-context";
 
 const defaultTasksState = {
-    tasks: [{
-        id: 1,
-        title: 'UX Adjustments',
-        tag: 'Research',
-        description: 'It just needs to adabt the UI from what you did before.',
-        state: 'todo',
-        date: new Date(2021, 2, 28)
-    },
-    {
-        id: 2,
-        title: 'Design System',
-        tag: 'UI Design',
-        description: 'Create a consistent look and feel both on weeb and mobile.',
-        state: 'qa',
-        date: new Date(2021, 2, 28)
-    },
-    {
-        id: 3,
-        title: 'Presentation',
-        tag: 'Planning',
-        description: 'Help businesses to clearly define their annual e-commerce digital strategy by creating a high-level plan.',
-        state: 'completed',
-        date: new Date(2021, 2, 28)
-    },
-    {
-        id: 4,
-        title: 'Moodboards',
-        tag: 'UI Design',
-        description: 'Add a field in the portal to let the user connect their Slack account.',
-        state: 'inwork',
-        date: new Date(2021, 2, 28)
-    }],
+    tasks: []
 
 }
 
 const taskReducer = (state, action) => {
-    if (action.type === 'ADD') {
+    if (action.type === 'SET') {
+        const fetchedTaks = action.value;
+        return {
+            tasks: fetchedTaks
+        }
+    } else if (action.type === 'ADD') {
         const task = action.value;
         task.id = state.tasks.length + 1;
         const updatedTasks = state.tasks.concat(task);
         return {
             tasks: updatedTasks
         };
-    }
-    else if (action.type === 'MOVE') {
+    } else if (action.type === 'MOVE') {
         const { id, target } = action.value;
         // console.log(action);
         // console.log(state.tasks.findIndex((task) => task.id === id))
@@ -71,6 +44,9 @@ const TaskProvider = props => {
 
     const [tasksState, dispatchTask] = useReducer(taskReducer, defaultTasksState);
 
+    const setTasksHandler = tasks => {
+        dispatchTask({ type: 'SET', value: tasks })
+    }
     const addTaskHandler = (task) => {
         dispatchTask({ type: 'ADD', value: task });
     }
@@ -81,6 +57,7 @@ const TaskProvider = props => {
 
     const taskContext = {
         tasks: tasksState.tasks,
+        setTasks: setTasksHandler,
         addTask: addTaskHandler,
         moveTask: moveTaskHandler
     }

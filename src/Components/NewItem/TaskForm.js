@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Button from "../UI/Button";
 import Input from "./Input";
 import styles from './TaskForm.module.scss';
-import { GrFormAdd, GrFormSubtract } from "react-icons/gr";
 import Modal from "../UI/Modal";
 import TaskContext from "../../store/task-context";
 import Card from "../UI/Card";
@@ -13,52 +12,69 @@ import useInput from "../../hooks/use-input";
 
 const FormOverlay = props => {
     const validate = value => value.trim() !== '';
-
-
-
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
     const {
         value: enteredTitle,
         isValid: titleIsValid,
         hasError: titleHasError,
         valueChangeHandler: titleChangeHandler,
-        inputBlurHandler: titleBlurHandler
+        inputBlurHandler: titleBlurHandler,
+        reset: titleReset
     } = useInput(validate);
     const {
         value: enteredDesc,
         isValid: descIsValid,
         hasError: descHasError,
         valueChangeHandler: descChangeHandler,
-        inputBlurHandler: descBlurHandler
+        inputBlurHandler: descBlurHandler,
+        reset: descReset
     } = useInput(validate);
     const {
         value: enteredDate,
         isValid: dateIsValid,
         hasError: dateHasError,
         valueChangeHandler: dateChangeHandler,
-        inputBlurHandler: dateBlurHandler
+        inputBlurHandler: dateBlurHandler,
+        reset: dateReset
     } = useInput(validate);
+
 
     const formIsValid = titleIsValid && descIsValid && dateIsValid;
 
     const taskCtx = useContext(TaskContext);
-    const [data, setData] = useState({
-        title: '',
-        tag: '',
-        description: '',
-        date: ''
-    });
-    const [addDesc, setAddDesc] = useState(false);
+    const [tag, setTag] = useState('');
 
 
-    const addDescClickHandle = () => {
-        setAddDesc((prevState) => !prevState);
+    const addTag = tag => {
+
+        setTag(tag);
+
     }
 
-
-    const formSubmitHandle = (e) => {
+    const formSubmitHandle = async (e) => {
         e.preventDefault();
 
-        console.log(descIsValid);
+        if (!formIsValid) {
+            return;
+        }
+        setIsLoading(true);
+        const task = {
+            'title': enteredTitle,
+            'tag': tag,
+            'description': enteredDesc,
+            'state': 'todo',
+            'date': new Date(enteredDate)
+        }
+        taskCtx.addTask(task);
+        await fetch('https://react-http-d8b6c-default-rtdb.firebaseio.com/tasks.json',
+            {
+                method: 'POST',
+                body: JSON.stringify(task)
+            }
+        )
+        setIsLoading(false);
+        props.onClick();
 
     }
 
@@ -77,29 +93,20 @@ const FormOverlay = props => {
                         onBlur: titleBlurHandler
                     }} error={titleHasError}
                 >
-                    {!addDesc ?
-                        <Button onClick={addDescClickHandle}>
-                            <GrFormAdd /> <p>Add description</p>
-                        </Button>
-                        :
-                        <Button onClick={addDescClickHandle}>
-                            <GrFormSubtract /> <p>Remove description</p>
-                        </Button>
-                    }
                 </Input>
-                {addDesc ?
-                    <Input
-                        input={{
-                            name: 'description',
-                            value: enteredDesc,
-                            title: 'Description',
-                            type: 'text-area',
-                            placeholder: 'Type a description ...',
-                            onChange: descChangeHandler,
-                            onBlur: descBlurHandler
-                        }} error={descHasError}
-                    /> : ''}
-                {/* <TagForm  /> */}
+
+                <Input
+                    input={{
+                        name: 'description',
+                        value: enteredDesc,
+                        title: 'Description',
+                        type: 'text-area',
+                        placeholder: 'Type a description ...',
+                        onChange: descChangeHandler,
+                        onBlur: descBlurHandler
+                    }} error={descHasError}
+                />
+                <TagForm passData={addTag} />
 
                 <div className={styles.date}>
                     <Input
@@ -137,7 +144,7 @@ const TaskForm = (props) => {
     return (
         <Modal onClick={props.onClick}>
             <Card>
-                <FormOverlay {...props} />
+                <FormOverlay onClick={props.onClick} />
             </Card>
 
         </Modal>

@@ -15,7 +15,6 @@ const TagForm = props => {
 
     const onClick = (event) => {
         const clicked = event.target.innerHTML.replace(/\s+/g, '').toLowerCase();
-        console.log(event);
         setActive({
             ...defaultState,
             [clicked]: true,
