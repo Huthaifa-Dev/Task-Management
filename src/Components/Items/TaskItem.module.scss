@@ -11,6 +11,31 @@ li {
         margin: 0 auto;
         border: 1px solid #ccc;
         border-radius: 10px;
+        position: relative;
+
+        &:hover {
+            .delete {
+                opacity: 0.5;
+            }
+        }
+
+        .delete {
+            color: inherit;
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            background: none;
+            transition: all 300ms ease-in-out;
+            font-size: 20px;
+            padding: 10px;
+            opacity: 0;
+
+            &:hover {
+                color: rgb(255, 60, 60);
+                opacity: 1;
+                background: rgb(255, 226, 226);
+            }
+        }
 
         .body {
             padding: 20px 15px;
@@ -40,6 +65,7 @@ li {
 
             color: #888;
             display: grid;
+            -ms-grid-columns: repeat(2, 1fr) 4fr;
             grid-template-columns: repeat(2, 1fr) 4fr;
 
             div {

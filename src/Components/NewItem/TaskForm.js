@@ -7,6 +7,8 @@ import TaskContext from "../../store/task-context";
 import Card from "../UI/Card";
 import TagForm from "./TagForm";
 import useInput from "../../hooks/use-input";
+import { useDispatch, useSelector } from "react-redux";
+import { boardActions } from "../../store/board-slice";
 
 
 
@@ -14,6 +16,7 @@ const FormOverlay = props => {
     const validate = value => value.trim() !== '';
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const dispatch = useDispatch();
     const {
         value: enteredTitle,
         isValid: titleIsValid,
@@ -42,7 +45,6 @@ const FormOverlay = props => {
 
     const formIsValid = titleIsValid && descIsValid && dateIsValid;
 
-    const taskCtx = useContext(TaskContext);
     const [tag, setTag] = useState('');
 
 
@@ -52,13 +54,12 @@ const FormOverlay = props => {
 
     }
 
-    const formSubmitHandle = async (e) => {
+    const formSubmitHandle = (e) => {
         e.preventDefault();
 
         if (!formIsValid) {
             return;
         }
-        setIsLoading(true);
         const task = {
             'title': enteredTitle,
             'tag': tag,
@@ -66,16 +67,8 @@ const FormOverlay = props => {
             'state': 'todo',
             'date': new Date(enteredDate)
         }
-        taskCtx.addTask(task);
-        await fetch('https://react-http-d8b6c-default-rtdb.firebaseio.com/tasks.json',
-            {
-                method: 'POST',
-                body: JSON.stringify(task)
-            }
-        )
-        setIsLoading(false);
+        dispatch(boardActions.addTaskToBoard(task));
         props.onClick();
-
     }
 
     return (
@@ -126,10 +119,12 @@ const FormOverlay = props => {
                             type: 'time'
                         }}
                     />
-                    <Input input={{
-                        title: 'Duration',
-                        type: 'number'
-                    }} />
+                    <Input
+                        input={{
+                            title: 'Duration',
+                            type: 'number'
+                        }}
+                    />
                 </div>
             </div>
             <Button className={styles.action} type='submit'>

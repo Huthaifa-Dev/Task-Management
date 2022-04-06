@@ -20,18 +20,19 @@ const Tasks = (props) => {
     }
     const dropHandle = (event) => {
         event.preventDefault();
+        const taskId = event.dataTransfer.getData('task');
+        dispatch(boardActions.updateTaskInsideBoard({
+            id: taskId,
+            state
+        }))
         // console.log(event)
-        try {
-            const taskId = event.dataTransfer.getData('task');
-            dispatch(boardActions.updateTaskInsideBoard({
-                id: taskId,
-                state
-            }))
-            // console.log(taskId, state);
-            // tasks.moveTask(taskId, state);
-        } catch (error) {
-            console.log(error)
-        }
+        // try {
+
+        //     // console.log(taskId, state);
+        //     // tasks.moveTask(taskId, state);
+        // } catch (error) {
+        //     console.log(error)
+        // }
 
     }
     return (
@@ -39,7 +40,7 @@ const Tasks = (props) => {
             <h2 className={styles.title + ' ' + styles[state]}>{props.title} <span className={styles.counter}>{filteredTasks.length}</span></h2>
             <hr className={styles[state]} />
             <ul className={styles.list}
-                onDragOver={dragOverHandle} onDrop={dropHandle} id={state} onClick={dropHandle}
+                onDragOver={dragOverHandle} onDrop={dropHandle} id={state}
             >
                 {filteredTasks.map(task => <TaskItem task={task} key={task.id} />)}
             </ul>

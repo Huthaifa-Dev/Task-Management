@@ -7,17 +7,21 @@ import TaskForm from "./Components/NewItem/TaskForm";
 
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoardData, sendBoardData } from "./store/board-actions";
+import { uiActions } from "./store/ui-slice";
 
 let initial = true;
 function App() {
-  const [formActive, setFormActive] = useState(false);
+  // const [formActive, setFormActive] = useState(false);
+
+  const formIsVisible = useSelector(state => state.ui.formIsVisible);
 
   const dispatch = useDispatch();
   const board = useSelector(state => state.board);
   const notification = useSelector(state => state.ui.notification);
   const form = useSelector(state => state.ui.formIsVisible)
   const formClickHandler = () => {
-    setFormActive((prevState) => !prevState);
+    dispatch(uiActions.toggleForm());
+    // setFormActive((prevState) => !prevState);
   }
 
 
@@ -46,8 +50,8 @@ function App() {
         <Tasks state={'qa'} title='QA' />
         <Tasks state={'completed'} title='COMPLETED' />
       </div>
-      {!formActive && <NewTask onClick={formClickHandler} />}
-      {formActive && <TaskForm onClick={formClickHandler} />}
+      {!formIsVisible && <NewTask onClick={formClickHandler} />}
+      {formIsVisible && <TaskForm onClick={formClickHandler} />}
     </Fragment>
   );
 }

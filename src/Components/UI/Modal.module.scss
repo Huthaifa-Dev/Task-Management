@@ -1,4 +1,6 @@
 .modal {
+    z-index: 9;
+
     .backdrop {
         position: absolute;
         top: 0;
@@ -19,6 +21,7 @@
     width: 100%;
     background: rgba($color: #ffff, $alpha: 0.5);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;

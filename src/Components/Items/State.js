@@ -5,9 +5,9 @@ import Button from '../UI/Button';
 import styles from './State.module.scss';
 const State = props => {
     const { state, date } = props;
-    const month = date.toLocaleString("en-US", { month: "short" });
+    // const month = date.toLocaleString("en-US", { month: "short" });
     const day = date.toLocaleString("en-US", { day: "2-digit" });
-
+    // console.log(date, date.toLocaleString("en-US", { month: "short" }))
     return (
         <div className={styles.status}>
             {state === 'qa' && <Button className={styles.like}><AiFillLike /><p>Like</p></Button>}

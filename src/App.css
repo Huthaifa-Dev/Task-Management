@@ -1,7 +1,9 @@
 .todo-states {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
+    -ms-grid-columns: repeat(4, 1fr);
     padding: 100px 0;
+    z-index: 1;
 }
 
 .temp-nav {

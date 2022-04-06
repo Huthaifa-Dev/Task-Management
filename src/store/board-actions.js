@@ -60,7 +60,6 @@ export const sendBoardData = (board) => {//board ={tasks}
             await sendRequest();
         } catch (error) {
             //send error
-            console.log(error)
         }
     }
 }
