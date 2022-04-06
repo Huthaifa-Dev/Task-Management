@@ -9,9 +9,6 @@ const TaskItem = (props) => {
     const { state, date } = props.task;
 
     const dragStartHandle = event => {
-        console.log(props.task.id);
-        console.log(props.task);
-
         event.dataTransfer.setData('task', props.task.id);
     }
 

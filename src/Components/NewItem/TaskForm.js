@@ -20,7 +20,7 @@ const FormOverlay = props => {
         hasError: titleHasError,
         valueChangeHandler: titleChangeHandler,
         inputBlurHandler: titleBlurHandler,
-        reset: titleReset
+        // reset: titleReset
     } = useInput(validate);
     const {
         value: enteredDesc,
@@ -28,7 +28,7 @@ const FormOverlay = props => {
         hasError: descHasError,
         valueChangeHandler: descChangeHandler,
         inputBlurHandler: descBlurHandler,
-        reset: descReset
+        // reset: descReset
     } = useInput(validate);
     const {
         value: enteredDate,
@@ -36,7 +36,7 @@ const FormOverlay = props => {
         hasError: dateHasError,
         valueChangeHandler: dateChangeHandler,
         inputBlurHandler: dateBlurHandler,
-        reset: dateReset
+        // reset: dateReset
     } = useInput(validate);
 
 

@@ -1,48 +1,18 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Tasks.module.scss';
 import TaskItem from './TaskItem';
-import TaskContext from '../../store/task-context';
+import { useDispatch, useSelector } from 'react-redux';
+import { boardActions } from '../../store/board-slice';
 
 const Tasks = (props) => {
-    const taskCtx = useContext(TaskContext);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        setIsLoading(true);
-        const fetchTasks = async () => {
+    const dispatch = useDispatch();
 
-            const response = await fetch('https://react-http-d8b6c-default-rtdb.firebaseio.com/tasks.json');
-            if (!response.ok) {
-                throw new Error('Request Failed');
-            }
-            const data = await response.json();
-            const tasksChange = data => {
-                const loadedTasks = [];
-                for (const key in data) {
-                    loadedTasks.push({
-                        id: key,
-                        title: data[key].title,
-                        description: data[key].description,
-                        state: data[key].state,
-                        tag: data[key].tag,
-                        date: new Date(data[key].date)
-                    });
-                }
-                taskCtx.setTasks(loadedTasks);
-            }
-            tasksChange(data);
-            setIsLoading(false);
-        }
-
-        fetchTasks().catch((err) => {
-            setIsLoading(false);
-            setError(err.message || 'Something went Wrong!');
-
-        })
-
-    }, [])
+    const tasks = useSelector(state => state.board.tasks);
     const state = props.state;
-    const filteredTasks = taskCtx.tasks.filter(task => task.state === props.state);
+
+    const filteredTasks = tasks.filter(task => task.state === props.state);
 
     const dragOverHandle = (event) => {
         // console.log(event);
@@ -53,23 +23,14 @@ const Tasks = (props) => {
         // console.log(event)
         try {
             const taskId = event.dataTransfer.getData('task');
-            // const fetchTasks = async () => {
-            //     const task = {
-            //         ...taskCtx.tasks[taskId],
-            //         'state': state,
-
-            //     }
-            //     await fetch('https://react-http-d8b6c-default-rtdb.firebaseio.com/tasks.json',
-            //         {
-            //             method: 'POST',
-            //             body: JSON.stringify(task)
-            //         }
-            //     )
-            // }
-            // fetchTasks();
-            taskCtx.moveTask(taskId, state);
+            dispatch(boardActions.updateTaskInsideBoard({
+                id: taskId,
+                state
+            }))
+            // console.log(taskId, state);
+            // tasks.moveTask(taskId, state);
         } catch (error) {
-
+            console.log(error)
         }
 
     }
