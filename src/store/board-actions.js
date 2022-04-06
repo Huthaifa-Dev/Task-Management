@@ -39,16 +39,15 @@ export const fetchBoardData = () => {
     }
 }
 
-export const sendBoardData = (data) => {
+export const sendBoardData = (board) => {//board ={tasks}
     return async dispatch => {
-
+        const tasks = board.tasks
+        console.log(tasks);
         const sendRequest = async () => {
             const response = await fetch('https://taskmanager-8b109-default-rtdb.firebaseio.com/tasks.json',
                 {
                     method: 'PUT',
-                    body: JSON.stringify({
-                        tasks: data.tasks
-                    })
+                    body: JSON.stringify(tasks)
                 }
             );
 
@@ -61,6 +60,7 @@ export const sendBoardData = (data) => {
             await sendRequest();
         } catch (error) {
             //send error
+            console.log(error)
         }
     }
 }

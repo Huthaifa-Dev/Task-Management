@@ -8,7 +8,7 @@ import TaskForm from "./Components/NewItem/TaskForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoardData, sendBoardData } from "./store/board-actions";
 
-
+let initial = true;
 function App() {
   const [formActive, setFormActive] = useState(false);
 
@@ -20,7 +20,7 @@ function App() {
     setFormActive((prevState) => !prevState);
   }
 
-  let initial = true;
+
 
   useEffect(() => {
     dispatch(fetchBoardData());
@@ -32,9 +32,10 @@ function App() {
       return;
     }
     if (board.changed) {
-      dispatch(sendBoardData());
+      console.log('changed');
+      dispatch(sendBoardData(board));
     }
-  }, [board, dispatch])
+  }, [board, dispatch]);
 
   return (
     <Fragment>

@@ -11,22 +11,19 @@ const boardSlice = createSlice({
     reducers: {
         addTaskToBoard(state, action) {
             state.tasks.push(action.payload.task);
+            state.changed = true;
         },
         updateTaskInsideBoard(state, action) {
+            state.changed = true;
             const newTaskState = action.payload.state;
             const taskId = action.payload.id;
-            console.log(taskId, newTaskState)
             const existingItem = state.tasks.find(item => item.id === taskId);
-            console.log(existingItem)
             if (existingItem) {
-                console.log(newTaskState)
                 existingItem.state = newTaskState;
             }
-            // console.log(state.tasks)
         },
         replaceBoard(state, action) {
             state.tasks = action.payload.tasks;
-            state.changed = true;
         }
     }
 });

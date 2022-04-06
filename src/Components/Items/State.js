@@ -19,7 +19,7 @@ const State = props => {
             {(state === 'todo' || state === 'inwork') &&
                 <div className={styles.date}>
                     <AiOutlineCalendar />
-                    <p>{day + ' ' + month}</p>
+                    <p>{day}</p>
                 </div>
             }
 
