@@ -4,8 +4,9 @@ import { BsCheck2All } from "react-icons/bs";
 import Button from '../UI/Button';
 import styles from './State.module.scss';
 const State = props => {
-    const { state, date } = props;
-    // const month = date.toLocaleString("en-US", { month: "short" });
+    const { state } = props;
+    const date = new Date(props.date);
+    const month = date.toLocaleString("en-US", { month: "short" });
     const day = date.toLocaleString("en-US", { day: "2-digit" });
     // console.log(date, date.toLocaleString("en-US", { month: "short" }))
     return (
@@ -19,7 +20,7 @@ const State = props => {
             {(state === 'todo' || state === 'inwork') &&
                 <div className={styles.date}>
                     <AiOutlineCalendar />
-                    <p>{day}</p>
+                    <p>{month} {day}</p>
                 </div>
             }
 

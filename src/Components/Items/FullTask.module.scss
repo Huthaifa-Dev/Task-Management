@@ -1,0 +1,77 @@
+.container {
+    position: relative;
+
+    .back {
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        left: 0;
+        padding: 10px;
+
+        button {
+            background-color: rgb(255, 255, 255);
+            color: rgb(221, 0, 0);
+            box-shadow: 0px 15px 20px -15px rgba(255, 255, 255, 0.66);
+
+        }
+    }
+
+    // border: 1px solid red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    .task {
+        box-shadow: 0px 15px 20px -15px rgba(204, 204, 204, 0.66);
+
+        width: 600px;
+        max-width: 100%;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        border: 1px solid #ccc;
+        padding: 25px 50px;
+        background-color: white;
+        border-radius: 10px;
+
+        section {
+            margin-bottom: 25px;
+
+
+        }
+
+        .controls button {
+
+            margin: 15px 0;
+            background-color: #306BFF;
+            box-shadow: 0px 15px 20px -15px rgba(48, 107, 255, 0.66);
+        }
+
+        .title {
+            margin-bottom: 25px;
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 1.25em;
+            font-weight: 700;
+
+            h1 {
+                // margin-right: 15px;
+            }
+        }
+
+
+
+        .description {
+            color: #999;
+            font-weight: 500;
+            margin-bottom: 15px;
+
+        }
+
+    }
+}

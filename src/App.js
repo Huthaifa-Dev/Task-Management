@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect, useState } from "react";
-import Tasks from "./Components/Items/Tasks";
-
+import React, { Fragment, useEffect } from "react";
+import TasksPage from "./Pages/TasksPage";
+import SingleTaskPage from "./Pages/SingleTaskPage"
 import './App.css';
 import NewTask from "./Components/NewItem/NewTask";
 import TaskForm from "./Components/NewItem/TaskForm";
@@ -8,6 +8,9 @@ import TaskForm from "./Components/NewItem/TaskForm";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBoardData, sendBoardData } from "./store/board-actions";
 import { uiActions } from "./store/ui-slice";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import ErrorPage from "./Pages/ErrorPage";
 
 let initial = true;
 function App() {
@@ -18,7 +21,6 @@ function App() {
   const dispatch = useDispatch();
   const board = useSelector(state => state.board);
   const notification = useSelector(state => state.ui.notification);
-  const form = useSelector(state => state.ui.formIsVisible)
   const formClickHandler = () => {
     dispatch(uiActions.toggleForm());
     // setFormActive((prevState) => !prevState);
@@ -40,19 +42,26 @@ function App() {
       dispatch(sendBoardData(board));
     }
   }, [board, dispatch]);
-
+  const tasks = <div className="content">
+    <TasksPage />
+    {!formIsVisible && <NewTask onClick={formClickHandler} />}
+    {formIsVisible && <TaskForm onClick={formClickHandler} />}
+  </div>
   return (
-    <Fragment>
+    <div className="container">
       <div className="temp-nav"></div>
-      <div className="todo-states">
-        <Tasks state={'todo'} title='TODO' />
-        <Tasks state={'inwork'} title='IN WORK' />
-        <Tasks state={'qa'} title='QA' />
-        <Tasks state={'completed'} title='COMPLETED' />
+      <div className="body">
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/home" />} exact />
+          <Route path="/home" element={<Home />} />
+          <Route path="/board" element={tasks} />
+          <Route path="/board/:taskId" element={< SingleTaskPage />} />
+          <Route path="*" element={< ErrorPage />} />
+        </Routes>
+
       </div>
-      {!formIsVisible && <NewTask onClick={formClickHandler} />}
-      {formIsVisible && <TaskForm onClick={formClickHandler} />}
-    </Fragment>
+
+    </div>
   );
 }
 

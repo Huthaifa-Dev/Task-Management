@@ -8,6 +8,10 @@
     .title {
         font-size: 1.25em;
         padding-bottom: 15px;
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 10px 10px 15px;
+        border-radius: 5px;
+        margin-bottom: -10px;
 
         .counter {
             font-size: 0.85em;
@@ -24,21 +28,28 @@
 
     hr {
         border-radius: 3px;
+        width: 95%;
+        margin: 0 auto;
 
         &.todo {
             border: 1px solid #111;
+            // color: #111;
+            background-color: #111;
         }
 
         &.inwork {
             border: 1px solid rgb(48, 97, 255);
+            background-color: rgb(48, 97, 255);
         }
 
         &.qa {
             border: 1px solid rgb(228, 156, 23);
+            background-color: rgb(228, 156, 23);
         }
 
         &.completed {
             border: 1px solid rgb(20, 187, 4);
+            background-color: rgb(20, 187, 4);
         }
     }
 
