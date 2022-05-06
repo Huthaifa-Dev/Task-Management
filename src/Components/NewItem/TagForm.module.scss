@@ -1,9 +1,7 @@
 .tags {
     list-style: none;
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
 
     button {
         opacity: 0.5;

@@ -1,0 +1,19 @@
+.container {
+    /* background-color: white; */
+    /* color: red; */
+    width: 100%;
+    /* padding: 50px */
+    height: 100%;
+    overflow: hidden;
+}
+
+.title {
+    background-color: white;
+    padding: 25px 50px;
+}
+
+.content {
+    padding: 50px;
+    /* height: inherit; */
+    /* overflow-y: scroll; */
+}

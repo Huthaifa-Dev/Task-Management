@@ -31,25 +31,30 @@ const FullTask = (props) => {
                     </div>
                 </section>
                 <section className={styles.description}>
-                    <em>{task.description}</em>
+                    <p>{task.description}</p>
                 </section>
-                <section className={styles.attachments}>
+                <section className={styles.additional}>
                     <h3>Attachments</h3>
                     <div className={styles.controls}>
                         <Button>
                             <TiAttachmentOutline />
                             <p>Attach</p>
+
                         </Button>
+                        <em>Not working yet</em>
+
                     </div>
                 </section>
-                <section className={styles.comments}>
+                <section className={styles.additional}>
                     <h3>Comments</h3>
 
                     <div className={styles.controls}>
                         <Button>
                             <AiOutlineComment />
-                            <p>Comment</p>
+                            <p>Comment </p>
                         </Button>
+                        <em>Not working yet</em>
+
                     </div>
                 </section>
 

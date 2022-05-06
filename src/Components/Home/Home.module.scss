@@ -1,0 +1,30 @@
+.content {
+    // background-color: red;
+    height: 100%;
+    width: 100%;
+    // padding: 50px;
+    text-align: center;
+
+}
+
+.image {
+    height: 75%;
+    // background-color: red;
+
+    padding: 50px;
+
+    img {
+        height: inherit;
+        width: 65%;
+    }
+}
+
+.controls {
+    // background-color: red;
+    display: flex;
+    justify-content: center;
+
+    button {
+        background-color: #306BFF;
+    }
+}

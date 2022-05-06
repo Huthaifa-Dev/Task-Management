@@ -1,0 +1,40 @@
+.sideNav {
+    // background-color: red;
+    width: 100%;
+    // height: 100vh;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+
+    a {
+        padding: 20px 30px;
+        font-size: 1.2em;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+
+        p {
+            margin-left: 10px;
+        }
+
+        &:hover {
+            background-color: #ccc;
+        }
+
+        &.active {
+            background-color: #aaa;
+        }
+
+        transition: all 300ms ease-in-out;
+    }
+}
+
+img {
+    // width: 50px;
+}
+
+.logo {
+    width: 50%;
+    margin: 50px auto;
+}

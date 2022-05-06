@@ -1,0 +1,17 @@
+.item {
+    background-color: white;
+    border-radius: 10px;
+    width: 30%;
+    height: 100%;
+
+    padding: 15px;
+    cursor: auto;
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+
+    a {
+        font-size: 35px;
+        align-self: center;
+    }
+}

@@ -1,0 +1,55 @@
+.card {
+    background-color: white;
+    width: 325px;
+    // height: 150px;
+    padding: 25px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-align: center;
+}
+
+.links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    // background-color: red;
+    gap: 10px;
+    width: 100%;
+
+    li {
+        width: 100%;
+        font-size: 15px;
+        // background-color: red;
+
+    }
+}
+
+.imageContainer {
+    border: 1px solid red;
+    margin: 0 auto;
+
+    img {
+        display: inline;
+        margin: 0 auto;
+        height: 100%;
+        width: auto;
+    }
+
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.bio {
+    padding: 15px 10px;
+    width: 100%;
+    text-align: justify;
+}
+
+.title {
+    padding: 10px;
+}

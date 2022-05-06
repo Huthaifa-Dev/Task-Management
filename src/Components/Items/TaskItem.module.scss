@@ -8,6 +8,9 @@ li {
     // border: 5px solid red;
     cursor: grab;
 
+    width: 100%;
+    position: relative;
+
     .todo-item {
         background-color: white;
         display: flex;
@@ -17,6 +20,36 @@ li {
         border: 1px solid #ccc;
         border-radius: 10px;
         position: relative;
+        box-shadow: -1px 3px 8px -1px rgba(0, 0, 0, 0.2);
+
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+
+            box-shadow: 0px 0px 15px 10px rgba(0, 255, 47, 0.2);
+
+        }
+
+        &.todo {
+            border: 2px solid rgb(253, 71, 71);
+            // color: #111;
+            // background-color: rgb(253, 71, 71);
+        }
+
+        &.inwork {
+            border: 2px solid rgb(48, 97, 255);
+            // background-color: rgb(48, 97, 255);
+        }
+
+        &.qa {
+            border: 2px solid rgb(228, 156, 23);
+            // background-color: rgb(228, 156, 23);
+        }
+
+        &.completed {
+            border: 2px solid rgb(20, 187, 4);
+            // background-color: rgb(20, 187, 4);
+        }
 
         &:hover {
             .delete {

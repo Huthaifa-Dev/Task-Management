@@ -9,9 +9,11 @@ const SingleTaskPage = () => {
     const dispatch = useDispatch();
     const tasks = useSelector(state => state.board.tasks)
     const data = tasks.find(task => task.id === taskId.taskId)
-    console.log(data);
+    // console.log(data);
     return (
-        <FullTask task={data} />
+        <div className="centered">
+            <FullTask task={data} />
+        </div>
     )
 }
 

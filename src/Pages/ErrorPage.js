@@ -6,4 +6,4 @@ function ErrorPage() {
     )
 }
 
-export default ErrorPage
+export default ErrorPage;

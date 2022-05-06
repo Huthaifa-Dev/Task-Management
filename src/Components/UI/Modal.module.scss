@@ -8,10 +8,12 @@
         width: 100%;
         height: 100%;
         z-index: 10;
+
     }
 
     .content {
         z-index: 100;
+        animation: slide-down 300ms ease-out forwards;
     }
 
     position: fixed;
@@ -19,13 +21,13 @@
     align-items: center;
     height: 100%;
     width: 100%;
-    background: rgba($color: #ffff, $alpha: 0.5);
+    background: rgba($color: rgb(0, 0, 0), $alpha: 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: slide-down 300ms ease-out forwards;
+
 }
 
 // .on {

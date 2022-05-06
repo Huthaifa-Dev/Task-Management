@@ -20,12 +20,13 @@ const TaskItem = (props) => {
     const deleteHandler = () => {
         dispatch(boardActions.deleteTaskFromBoard(props.task.id));
     }
+
     return (
 
         <li>
             <Link to={`/board/${id}`}>
                 <Draggable onDragStart={dragStartHandle}>
-                    <div className={styles['todo-item']} id={props.task.id}>
+                    <div className={`${styles['todo-item']} ${styles[props.task.state]}`} id={props.task.id}>
                         <Button className={styles.delete} onClick={deleteHandler}><IoMdClose /></Button>
                         <div className={styles.body}>
                             <h2 className={styles.title}>{props.task.title}</h2>
