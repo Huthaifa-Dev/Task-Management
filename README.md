@@ -97,7 +97,7 @@ There are several Ideas on my mind to improve the system further:
 
 You can contact me here:
 
-* Gmail : huthaifajamal2Gmail.com
+* Gmail : huthaifajamal2@gmail.com
 * <a target="_blank" href="https://linkedin.com/in/huthaifa-jamal" > <img width="40" height="40" alt="Huthaifa Salman | LinkedIn" src="https://user-images.githubusercontent.com/62269745/151352812-ab8645ba-919e-4817-a4ff-3688b0bd08b6.svg"/> </a>
 * <a target="_blank" href="https://instagram.com/huthaifa_salman" >
             <img width="40" height="40" alt="Huthaifa Salman | Instagram" src="https://user-images.githubusercontent.com/62269745/151352769-630430ce-bb59-4414-b01b-1e26e17a7535.svg"/>
